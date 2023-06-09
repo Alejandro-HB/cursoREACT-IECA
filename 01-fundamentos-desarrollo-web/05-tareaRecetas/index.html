@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js">
+    </script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+    </script>
+
+    <script>
+        const root= ReactDOM.createRoot(document.getElementById('root'));
+
+        let recipeArray = [];
+        
+        const recipeList=React.createElement('ul', null, recipeArray.map((nombre, index)=>{
+            return React.createElement('li', {key:index}, nombre);
+        }));
+
+        const renderRecipeList=(array)=>{
+            const list=React.createElement('ul', null, array.map((nombre, index)=>{
+                console.log(array[index].name)
+                return React.createElement('li', {key:index}, [
+                    React.createElement('li', null, array[index].name),
+                    React.createElement('li', null, array[index].ingredients),
+                    React.createElement('li', null, array[index].time),
+                    React.createElement('hr', null, null)
+
+
+                ]);
+            })
+            );
+
+            //console.log('renderizandoooo')
+            root.render([form, list]);
+        }
+
+        const submit = (event)=>{
+            event.preventDefault();
+
+            //Objeto para una receta
+            let recipe={
+                name: event.target.nombre.value,
+                ingredients: event.target.ingredientes.value,
+                time: event.target.tiempo.value
+            }
+
+            recipeArray.push(recipe);
+            //console.log(recipeArray);
+            renderRecipeList(recipeArray);
+
+
+            event.target.nombre.value='';
+            event.target.ingredientes.value='';
+            event.target.tiempo.value='';
+            event.target.nombre.focus();
+
+        }
+
+        const form = React.createElement('form', {onSubmit:submit}, [
+            React.createElement('input', {type:'text', name:'nombre', placeholder:'Nombre'}),
+            React.createElement('input', {type:'text', name:'ingredientes', placeholder:'Ingredientes'}),
+            React.createElement('input', {type:'number', name:'tiempo', placeholder:'Tiempo (min)'}),
+            React.createElement('button', {type:'submit'}, 'Agregar receta')
+        ]);
+
+        root.render(form);
+    </script>
+
+</body>
+</html>

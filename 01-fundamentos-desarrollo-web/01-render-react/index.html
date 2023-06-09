@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js">
+    </script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+    </script>
+
+    <script>
+        let name='Alejandro';
+
+        const helloWorld=React.createElement('h1', {id:"hello-world"}, `Hola ${name}`);
+        const root=ReactDOM = ReactDOM.createRoot(document.getElementById('root'));
+
+        root.render(helloWorld);
+    </script>
+
+</body>
+</html>
