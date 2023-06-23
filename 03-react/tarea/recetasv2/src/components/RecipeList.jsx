@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import RecipeForm from "./RecipeForm";
-import RecipeItem from "./RecipeItem";
+import RecipeForm from "./RecipeForm.jsx";
+import RecipeItem from "./RecipeItem.jsx";
 
 const RecipeList = () => {
-  const [productCount, setProductCount] = useState(0);
-  const [recipes, setProducts] = useState([
+  const [recipeCount, setRecipeCount] = useState(0);
+  const [recipes, setRecipes] = useState([
     {
       name: "Receta 1",
       ingredients: "Ingrediente 1, ingrediente 2, ingrediente 3",
@@ -22,25 +22,31 @@ const RecipeList = () => {
     },
   ]);
 
-  const addProduct = (recipe) => {
-    setProducts([...recipes, recipe]);
+  const addRecipe = (recipe) => {
+    setRecipes([...recipes, recipe]);
   };
 
   useEffect(()=>{
-    setProductCount(recipes.length)
+    setRecipeCount(recipes.length)
   }, [recipes])
 
   return (
     <>
-      <h1> Mi lista de productos ({productCount} Productos)</h1>
-      <RecipeForm onSubmit={addProduct} />
-      <ul className='flex gap-4 py-4'>
-        {recipes.map((recipe) => (
-          <li>
-            <RecipeItem product={recipe} />
-          </li>
-        ))}
-      </ul>
+    <div className="content-center text-center">
+      <div className="header">
+        <h1> Mis recetas ({recipeCount} Recetas)</h1>
+      </div>
+      <RecipeForm onSubmit={addRecipe} />
+      <div class="main-container">
+        <ul className="flex gap-4 py-4">
+          {recipes.map((recipe) => (
+            <li>
+              <RecipeItem recipe={recipe} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
     </>
   );
 };
